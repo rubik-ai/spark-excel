@@ -17,21 +17,6 @@ resolvers ++= Seq("jitpack" at "https://jitpack.io")
 libraryDependencies ++= Seq("org.slf4j" % "slf4j-api" % "1.7.32" % "provided")
   .map(_.excludeAll(ExclusionRule(organization = "stax")))
 
-shadedDeps ++= Seq(
-  "org.apache.poi" ^ "poi" ^ "4.1.2",
-  "org.apache.poi" ^ "poi-ooxml" ^ "4.1.2",
-  "com.norbitltd" ^^ "spoiwo" ^ "1.8.0",
-  "com.github.pjfanning" ^ "excel-streaming-reader" ^ "2.3.6",
-  "com.github.pjfanning" ^ "poi-shared-strings" ^ "1.0.4",
-  "org.apache.commons" ^ "commons-compress" ^ "1.21"
-)
-
-shadeRenames ++= Seq(
-  "org.apache.poi.**" -> "shadeio.poi.@1",
-  "com.norbitltd.spoiwo.**" -> "shadeio.spoiwo.@1",
-  "com.github.pjfanning.**" -> "shadeio.pjfanning.@1",
-  "org.apache.commons.compress.**" -> "shadeio.commons.compress.@1"
-)
 
 publishThinShadedJar
 
@@ -39,6 +24,14 @@ libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-core" % testSparkVersion.value % "provided",
   "org.apache.spark" %% "spark-sql" % testSparkVersion.value % "provided",
   "org.apache.spark" %% "spark-hive" % testSparkVersion.value % "provided",
+
+  "org.apache.poi" % "poi" % "4.1.2",
+  "org.apache.poi" % "poi-ooxml" % "4.1.2",
+  "com.norbitltd" %% "spoiwo" % "1.8.0",
+  "com.github.pjfanning" % "excel-streaming-reader" % "2.3.6",
+  "com.github.pjfanning" % "poi-shared-strings" % "1.0.4",
+  "org.apache.commons" % "commons-compress" % "1.21",
+
   "org.typelevel" %% "cats-core" % "2.6.1" % Test,
   "org.scalatest" %% "scalatest" % "3.2.9" % Test,
   "org.scalatestplus" %% "scalacheck-1-15" % "3.2.9.0" % Test,
